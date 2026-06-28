@@ -54,18 +54,24 @@ st.markdown("""
         border-left: 4px solid #1f77b4;
     }
     .chat-message-user {
-        background: #e8f4fd;
+        background: #dbe9fd;
+        color: #0f2d4f;
         border-radius: 10px;
         padding: 12px 16px;
         margin: 8px 0;
         border-left: 3px solid #1f77b4;
+        white-space: pre-wrap;
+        word-wrap: break-word;
     }
     .chat-message-assistant {
-        background: #f8f9fa;
+        background: #e9f6eb;
+        color: #1f4725;
         border-radius: 10px;
         padding: 12px 16px;
         margin: 8px 0;
         border-left: 3px solid #28a745;
+        white-space: pre-wrap;
+        word-wrap: break-word;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -132,7 +138,12 @@ with st.spinner("Running pipeline..."):
 # ─────────────────────────────────────────
 # TABS
 # ─────────────────────────────────────────
-tab1, tab2 = st.tabs(["📊 Dashboard", "💬 Ask the Analyst"])
+if "active_tab" not in st.session_state:
+    st.session_state.active_tab = "dashboard"
+
+default_tab = "💬 Ask the Analyst" if st.session_state.active_tab == "chat" else "📊 Dashboard"
+
+tab1, tab2 = st.tabs(["📊 Dashboard", "💬 Ask the Analyst"], default=default_tab)
 
 # ═════════════════════════════════════════
 # TAB 1: DASHBOARD
@@ -317,6 +328,8 @@ with tab2:
     for i, suggestion in enumerate(suggestions):
         if cols[i % 3].button(suggestion, key=f"suggestion_{i}"):
             st.session_state.pending_question = suggestion
+            st.session_state.active_tab = "chat"
+            st.rerun()
 
     st.divider()
 
@@ -378,4 +391,5 @@ with tab2:
                     "content": f"Sorry, I ran into an issue: {str(e)}"
                 })
 
+        st.session_state.active_tab = "chat"
         st.rerun()
