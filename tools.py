@@ -4,7 +4,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 from langchain_openai import ChatOpenAI
-from langchain.tools import tool
+from langchain_core.tools import tool
 from agents.ingestion import IngestionAgent
 from agents.eda import EDAAgent
 from agents.modeling import ModelingAgent

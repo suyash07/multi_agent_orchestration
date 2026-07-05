@@ -1,5 +1,6 @@
 imbalanced-learn==0.12.4
 langchain==0.3.30
+langchain-community==0.3.29
 langchain-core==0.3.86
 langchain-openai==0.3.35
 langchain-text-splitters==0.3.11
@@ -8,8 +9,9 @@ langgraph-checkpoint==2.1.2
 langgraph-prebuilt==0.6.5
 langgraph-sdk==0.2.9
 openai==2.44.0
+numpy>=1.24.0
 pandas==2.3.3
-plotly==6.8.0
+plotly==5.24.1
 scikit-learn==1.6.1
 streamlit==1.50.0
 xgboost==2.1.4
