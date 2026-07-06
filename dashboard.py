@@ -243,11 +243,10 @@ with tab1:
         .sort_values("Churn Probability", ascending=False)
         .head(20)
     )
+    
     st.dataframe(
-        high_risk.style.background_gradient(
-            subset=["Churn Probability"], cmap="Blues"
-        ),
-        use_container_width=True
+    high_risk.sort_values("Churn Probability", ascending=False),
+    use_container_width=True
     )
 
     st.divider()
